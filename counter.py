@@ -8,8 +8,8 @@ def ctr(message):
     ndice = ''
     calc = 0
     con = message.replace('$roll',"").strip()
-    dlst = re.findall('(?:\d|)d\d+', con)
-    clst = re.sub('(?:\d|)d\d+','H', con)
+    dlst = re.findall('(?:\d+|)d\d+', con)
+    clst = re.sub('(?:\d+|)d\d+','H', con)
     for l in dlst:
         for i in l:
             if i == 'd':
@@ -22,13 +22,14 @@ def ctr(message):
             for n in range(0,int(dice)):
                 calc+=r.randint(1,int(ndice))
             dlist.append(calc)
+            calc=0
         elif dice == '':
             dlist.append(r.randint(1,int(ndice)))
         dice = ''
         ndice = ''
+        d=0
 
     for i in dlist:
         clst = clst.replace('H',str(i), 1)
 
     return(clst+' = '+str(eval(clst)))
-
